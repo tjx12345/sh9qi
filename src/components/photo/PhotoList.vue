@@ -5,20 +5,20 @@
         <div class="photo-header">
             <ul>
                 <li v-for="category in categorys" :key="category.id">
-                    <a href="javascript:;">{{category.title}}</a>
+                    <a href="javascript:;" @click="getImgsByCategoryId(category.id)">{{category.title}}</a>
                 </li>
                 
             </ul>
         </div>
         <div class="photo-list">
             <ul>
-                <li>
+                <li v-for="img in imgs" :key="img.id">
                     <a>
-                        <img src="">
+                        <img v-lazy="img.img_url">
                         <p>
-                            <span>图片标题</span>
+                            <span>{{img.title}}</span>
                             <br>
-                            <span>图片摘要</span>
+                            <span>{{img.zhaiyao}}</span>
                         </p>
                     </a>
                 </li>
@@ -31,6 +31,7 @@ export default {
     data(){
         return {
             categorys:[],//图片分类，{id:1,title:'家居生活'}
+            imgs:[],//保存图片数据
         }
     },
     created(){
@@ -45,13 +46,38 @@ export default {
         })
         .catch(err=>{
             console.log('获取图片分类失败',err);
-        })
+        });
+
+        //默认请求0，全部数据
+        this.getImgsByCategoryId(0);
+    },
+    methods:{
+        getImgsByCategoryId(id){
+             //默认发起0的请求,获取全部数据
+            this.$ajax.get('getimages/' + id)
+            .then(res=>{
+                this.imgs = res.data.message;
+            })
+            .catch(err=>{
+                console.log('获取图片数据失败',err);
+            })
+        }
     }
 }
 
 
 </script>
-<style>
+<style scoped>
+
+/*图片懒加载*/
+image[lazy=loading] {
+  width: 40px;
+  height: 300px;
+  margin: auto;
+}
+
+
+
 .photo-header li {
     list-style: none;
     display: inline-block;
