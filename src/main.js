@@ -7,7 +7,24 @@ import Home from './components/home/Home.vue'
 import Vip from './components/vip/Vip.vue';
 import Shopcart from './components/shopcart/Shopcart.vue';
 import Search from './components/search/Search.vue';
+import NewsList from './components/news/NewsList.vue';
 //引入组件 结束
+//全局组件的操作 开始
+import NavBar from './components/commons/NavBar.vue';
+Vue.component('NavBar',NavBar); //<nav-bar></nav-bar>
+//全局组件的操作 结束
+
+
+
+
+//Moment：开始
+import Moment from 'moment';
+//声明全局过滤器
+Vue.filter('convertDate',function(value){  
+    return Moment(value).format('YYYY-MM-DD');
+});
+//Moment：结束
+
 
 
 //MintUi: 开始
@@ -36,6 +53,7 @@ let router = new VueRouter({
         {name:'vip',path:'/vip',component:Vip}, //vip会员
         {name:'shopcart',path:'/shopcart',component:Shopcart}, //购物车
         {name:'search',path:'/search',component:Search}, //查找
+        {name:'news.list',path:'/news/list',component:NewsList},//新闻列表
 
    ]
 })
