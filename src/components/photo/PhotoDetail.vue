@@ -16,6 +16,11 @@
         <div class="photo-desc">
             <p v-html="imgInfo.content"></p>
         </div>
+
+
+        <!-- 评论组件 -->
+        <comment :cid="imgId"></comment>
+
     </div>
 </template>
 <script>
@@ -24,14 +29,15 @@ export default {
         return {
             imgInfo:{},//图片详情数据
             imgs:[], //缩略图
+            imgId:'', //图片id
         }
     },
     created(){
-        let imgId = this.$route.params.imgId;
+        this.imgId = this.$route.params.imgId;
         //合并请求，保证两个请求都成功
         this.$ajax.all([
-            this.$ajax.get('getimageInfo/'+ imgId),
-            this.$ajax.get('getthumimages/'+ imgId)
+            this.$ajax.get('getimageInfo/'+ this.imgId),
+            this.$ajax.get('getthumimages/'+ this.imgId)
         ])
         .then( this.$ajax.spread( (infoRes,imgsRes)=>{
                 this.imgInfo = infoRes.data.message[0];

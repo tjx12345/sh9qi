@@ -15,7 +15,9 @@ import PhotoDetail from './components/photo/PhotoDetail.vue';
 
 //全局组件的操作 开始
 import NavBar from './components/commons/NavBar.vue';
-Vue.component('NavBar',NavBar); //<nav-bar></nav-bar>
+import Comment from './components/commons/Comment.vue';
+Vue.component('NavBar',NavBar); //<nav-bar title="xxx"></nav-bar>
+Vue.component('Comment',Comment); //<comment cid="xxx"></comment>
 //全局组件的操作 结束
 
 
@@ -53,6 +55,8 @@ import './static/css/global.css';
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 let router = new VueRouter({
+   //更改默认router-link匹配锚点值后加上的class名，默认值router-link-active  
+   linkActiveClass:'mui-active',
    routes:[
         //加入重定向
     { path:'/',redirect:{name:'home'} }, 
@@ -73,6 +77,22 @@ let router = new VueRouter({
 import Axios from 'axios';
 Vue.prototype.$ajax = Axios;
 Axios.defaults.baseURL = 'http://182.254.146.100:8899/api/';
+//设置loading拦截器
+Axios.interceptors.request.use(config=>{
+    MintUi.Indicator.open({//显示loadding图标
+      text: '加载中...',
+      spinnerType: 'fading-circle'
+    });
+   return config; 
+});
+//响应的拦截器
+Axios.interceptors.response.use(response=>{
+    MintUi.Indicator.close(); //关闭loadding图标
+    return response;
+})
+
+
+
 //Axios: 结束
 
 
