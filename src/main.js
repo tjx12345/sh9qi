@@ -10,6 +10,7 @@ import Search from './components/search/Search.vue';
 import NewsList from './components/news/NewsList.vue';
 import NewsDetail from './components/news/NewsDetail.vue';
 import PhotoList from './components/photo/PhotoList.vue';
+import PhotoDetail from './components/photo/PhotoDetail.vue';
 //引入组件 结束
 
 //全局组件的操作 开始
@@ -28,7 +29,10 @@ Vue.filter('convertDate',function(value){
 });
 //Moment：结束
 
-
+//VuePreview: 开始
+import VuePreview from 'vue-preview';
+Vue.use(VuePreview);
+//VuePreview: 结束
 
 //MintUi: 开始
 import MintUi from 'mint-ui';
@@ -58,7 +62,8 @@ let router = new VueRouter({
     {name:'search',path:'/search',component:Search}, //查找
     {name:'news.list',path:'/news/list',component:NewsList},//新闻列表
     {name:'news.detail',path:'/news/detail',component:NewsDetail},//新闻详情
-    {name:'photo.list',path:'/photo/list',component:PhotoList}//图文分享
+    {name:'photo.list',path:'/photo/list',component:PhotoList},//图文分享
+    {name:'photo.detail',path:'/photo/detail/:imgId',component:PhotoDetail}//图片详情
 
    ]
 })
