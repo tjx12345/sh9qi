@@ -1,0 +1,23 @@
+/*引入自定义图标*/
+@font-face {
+    font-family: Muiicons;
+    font-weight: normal;
+    font-style: normal;
+
+    src: url('../fonts/iconfont.ttf') format('truetype');
+}
+
+/*加入自己的图标样式*/
+.icon-gouwuche:before { content: "\e600"; }
+
+.icon-gouwucheman:before { content: "\e601"; }
+
+.icon-shouye:before { content: "\e60c"; }
+
+.icon-huiyuan:before { content: "\e9f2"; }
+
+.icon-work-search:before { content: "\e60e"; }
+
+.icon-huiyuan1:before { content: "\e602"; }
+
+.icon-gouwuche-white-copy:before { content: "\e603"; }

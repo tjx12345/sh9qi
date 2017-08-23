@@ -2,8 +2,11 @@
 import Vue from 'vue';
 
 //引入组件 开始
-import Home from './components/home/Home.vue'
 import App from './App.vue';
+import Home from './components/home/Home.vue'
+import Vip from './components/vip/Vip.vue';
+import Shopcart from './components/shopcart/Shopcart.vue';
+import Search from './components/search/Search.vue';
 //引入组件 结束
 
 
@@ -17,13 +20,23 @@ Vue.use(MintUi);
 import './static/libs/mui-master/dist/css/mui.css';
 // Mui: 结束
 
+// 引入全局的css
+import './static/css/global.css';
+
+
 
 //VueRouter: 开始
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 let router = new VueRouter({
    routes:[
-        {name:'home',path:'/home',component:Home}
+        //加入重定向
+        { path:'/',redirect:{name:'home'} }, 
+        {name:'home',path:'/home',component:Home},//首页
+        {name:'vip',path:'/vip',component:Vip}, //vip会员
+        {name:'shopcart',path:'/shopcart',component:Shopcart}, //购物车
+        {name:'search',path:'/search',component:Search}, //查找
+
    ]
 })
 //VueRouter: 结束
