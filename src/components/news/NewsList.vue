@@ -5,7 +5,7 @@
         <!-- mui中的图文列表 -->
         <ul class="mui-table-view">
             <li v-for="news in newsList" :key="news.id" class="mui-table-view-cell mui-media">
-                <a>
+                <router-link :to="{name:'news.detail',query:{newsId:news.id}  }">
                     <img class="mui-media-object mui-pull-left" :src="news.img_url">
                     <div class="mui-media-body">
                         <span v-text="news.title"></span>
@@ -14,7 +14,7 @@
                             <p>发表时间:{{news.add_time | convertDate}}</p>
                         </div>
                     </div>
-                </a>
+                </router-link>
             </li>
         </ul>
     </div>
@@ -52,8 +52,4 @@ export default {
     float: right;
 }
 
-
-.tmpl{
-    margin-bottom: 50px;
-}
 </style>
