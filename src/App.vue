@@ -1,8 +1,9 @@
 <template>
     <div>
-        <mt-header title="上海9期信息管理系统"></mt-header>
+        <mt-header title="上海9期信息管理系统" ref="n1"></mt-header>
+        <!-- 留坑 -->
         <router-view></router-view>
-        <nav class="mui-bar mui-bar-tab">
+        <nav class="mui-bar mui-bar-tab" ref="n2">
             <router-link :to="{name:'home'}" class="mui-tab-item" >
                 <span class="mui-icon icon-shouye"></span>
                 <span class="mui-tab-label">首页</span>
