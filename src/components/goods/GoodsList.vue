@@ -1,11 +1,10 @@
 <template>
     <div class="tmpl" :style="{height:parentHeight+'px'}">
         <nav-bar title="商品列表"></nav-bar>
-    
             <mt-loadmore  :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" :auto-fill="autoFill" @bottom-status-change="stateChange" ref="loadmore">
                 <ul class="mui-table-view mui-grid-view" ref="ul">
                 <li  v-for="goods in goodsList" :key="goods.id" class="mui-table-view-cell mui-media mui-col-xs-6">
-                    <a>
+                    <router-link :to="{name:'goods.detail',params:{goodsId:goods.id} }">
                         <img class="mui-media-object" :src="goods.img_url">
                         <div class="mui-media-body">{{goods.title}}</div>
                         <div class="desc">
@@ -22,7 +21,7 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </router-link>
                 </li>
             </ul>
         </mt-loadmore>

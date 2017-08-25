@@ -12,11 +12,14 @@ import NewsDetail from './components/news/NewsDetail.vue';
 import PhotoList from './components/photo/PhotoList.vue';
 import PhotoDetail from './components/photo/PhotoDetail.vue';
 import GoodsList from './components/goods/GoodsList.vue';
+import GoodsDetail from './components/goods/GoodsDetail.vue';
 //引入组件 结束
 
 //全局组件的操作 开始
 import NavBar from './components/commons/NavBar.vue';
 import Comment from './components/commons/Comment.vue';
+import MySwipe from './components/commons/MySwipe.vue';
+Vue.component('MySwipe',MySwipe); //<my-swipe url="xxx"></my-swipe>
 Vue.component('NavBar',NavBar); //<nav-bar title="xxx"></nav-bar>
 Vue.component('Comment',Comment); //<comment cid="xxx"></comment>
 //全局组件的操作 结束
@@ -70,7 +73,7 @@ let router = new VueRouter({
     {name:'photo.list',path:'/photo/list',component:PhotoList},//图文分享
     {name:'photo.detail',path:'/photo/detail/:imgId',component:PhotoDetail},//图片详情
     {name:'goods.list',path:'/goods/list',component:GoodsList}, //商品列表
-
+    {name:'goods.detail',path:'/goods/detail/:goodsId',component:GoodsDetail},//商品详情
    ]
 })
 //VueRouter: 结束
