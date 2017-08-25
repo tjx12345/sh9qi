@@ -11,6 +11,7 @@ import NewsList from './components/news/NewsList.vue';
 import NewsDetail from './components/news/NewsDetail.vue';
 import PhotoList from './components/photo/PhotoList.vue';
 import PhotoDetail from './components/photo/PhotoDetail.vue';
+import GoodsList from './components/goods/GoodsList.vue';
 //引入组件 结束
 
 //全局组件的操作 开始
@@ -67,7 +68,8 @@ let router = new VueRouter({
     {name:'news.list',path:'/news/list',component:NewsList},//新闻列表
     {name:'news.detail',path:'/news/detail',component:NewsDetail},//新闻详情
     {name:'photo.list',path:'/photo/list',component:PhotoList},//图文分享
-    {name:'photo.detail',path:'/photo/detail/:imgId',component:PhotoDetail}//图片详情
+    {name:'photo.detail',path:'/photo/detail/:imgId',component:PhotoDetail},//图片详情
+    {name:'goods.list',path:'/goods/list',component:GoodsList}, //商品列表
 
    ]
 })
