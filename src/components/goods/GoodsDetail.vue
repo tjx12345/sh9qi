@@ -13,16 +13,16 @@
                 </span></li>
                 <li class="price-li">市场价：
                     <s>￥{{goodsInfo.market_price}}</s> 销售价：<span>￥{{goodsInfo.sell_price}}</span></li>
-                <li class="number-li">购买数量：<span>-</span><span>1</span><span>+</span></li>
+                <li class="number-li">购买数量：<span @click="sub">-</span><span>{{pickNum}}</span><span @click="add">+</span></li>
                 <li>
                     <mt-button type="primary">立即购买</mt-button>
-                    <mt-button type="danger">加入购物车</mt-button>
+                    <mt-button type="danger" @click="addShopcart">加入购物车</mt-button>
                 </li>
             </ul>
         </div>
-
-            <div class="ball"></div>
-
+        <transition name="ball" @after-enter="afterEnter">
+            <div class="ball" v-if="isShow"></div>
+        </transition>
         <div class="product-props">
             <ul>
                 <li>商品参数</li>
@@ -34,21 +34,25 @@
         <div class="product-info">
             <ul>
                 <li>
-                    <mt-button type="primary" size="large" plain>图文介绍</mt-button>
+                    <mt-button type="primary" size="large" plain @click="showPhotoInfo">图文介绍</mt-button>
                 </li>
                 <li>
-                    <mt-button type="danger" size="large" plain>商品评论</mt-button>
+                    <mt-button type="danger" size="large" plain @click="showGoodsComment">商品评论</mt-button>
                 </li>
             </ul>
         </div>
     </div>
 </template>
 <script>
+import Connector from '../commons/Connector.js';
 export default {
     data(){
         return {
+            pickNum:1, //添加购物车数量
+            isShow:false,//小球是否插入
             goodsInfo:{}, //商品数据
             // myUrl:'',//轮播图url  getthumimages/43
+            
         }
     },
     created(){
@@ -56,8 +60,6 @@ export default {
         let goodsId = this.$route.params.goodsId;
         //这种方式可以
         // this.myUrl = 'getthumimages/' + goodsId;
-
-
         this.$ajax.get('goods/getinfo/' + goodsId)
         .then(res=>{
             this.goodsInfo = res.data.message[0];
@@ -65,8 +67,40 @@ export default {
         .catch(err=>{
             console.log('获取商品信息失败',err);
         })
-
-
+    },
+    methods:{
+        addShopcart(){
+            //插入小球
+            this.isShow = true;
+            //通知父组件数据更改
+            Connector.$emit('changeShopcart',this.pickNum);
+        },
+        afterEnter(){
+            this.isShow = false;//移除小球
+        },
+        add(){
+            //判断添加不能超过库存数量
+            if(this.goodsInfo.stock_quantity<=this.pickNum) return;
+            this.pickNum++;
+        },
+        sub(){
+            if(this.pickNum <= 1) return;
+            this.pickNum--;
+        },
+        //跳转到商品评论组件
+        showGoodsComment(){
+            this.$router.push({
+                name:'goods.comment',
+                query:{goodsId: this.goodsInfo.id}
+            });
+        },
+        //跳转到图文详情，其实是新闻详情
+        showPhotoInfo(){
+            this.$router.push({
+                name:'goods.PhotoDetail',
+                query:{newsId:this.goodsInfo.id}
+            })
+        }
     }
 }
 
@@ -79,6 +113,7 @@ export default {
 
 @keyframes bounce-in {
     0% {
+        /*translate3d硬件加速，流畅一些*/
         transform: translate3d(0, 0, 0);
     }
     50% {

@@ -13,6 +13,8 @@ import PhotoList from './components/photo/PhotoList.vue';
 import PhotoDetail from './components/photo/PhotoDetail.vue';
 import GoodsList from './components/goods/GoodsList.vue';
 import GoodsDetail from './components/goods/GoodsDetail.vue';
+import GoodsComment from './components/goods/GoodsComment.vue';
+import NotFound from './components/commons/NotFound.vue';
 //引入组件 结束
 
 //全局组件的操作 开始
@@ -74,8 +76,35 @@ let router = new VueRouter({
     {name:'photo.detail',path:'/photo/detail/:imgId',component:PhotoDetail},//图片详情
     {name:'goods.list',path:'/goods/list',component:GoodsList}, //商品列表
     {name:'goods.detail',path:'/goods/detail/:goodsId',component:GoodsDetail},//商品详情
+    {name:'goods.comment',path:'/goods/comment',component:GoodsComment},//商品评论
+    {name:'goods.PhotoDetail',path:'/goods/photo/detail',component:NewsDetail},//商品图文详情
+
+
+    //404
+    {path:'*',component:NotFound},//404组件
    ]
-})
+});
+
+//测试全局钩子的操作，应用场景，就是前端的权限控制  开始
+// router.beforeEach((to, from, next) => {
+//       //假如后台返回 当前用户 只有goods类的权限，说明当前用户就不能进入photo
+//       let permissions = 'goods';//假如服务器返回权限
+//       console.log('to',to);
+//       console.log(to.name.startsWith(permissions));
+//       console.log('from',from);
+//       //next(); //放行  行为: 1:放行 ,2:不放行 3:重定向
+//       if(to.name.startsWith(permissions)){
+//           next();
+//       }else{
+//           alert('您好，您不具备权限访问该页面');
+//           next(false);
+//       }
+// });
+//测试全局钩子的操作，应用场景，就是前端的权限控制  结束
+
+
+
+
 //VueRouter: 结束
 
 //Axios: 开始

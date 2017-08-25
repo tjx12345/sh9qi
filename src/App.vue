@@ -2,7 +2,10 @@
     <div>
         <mt-header title="上海9期信息管理系统" ref="n1"></mt-header>
         <!-- 留坑 -->
-        <router-view></router-view>
+        <!-- 过渡效果,mode 先当前元素离开，再进新元素 -->
+        <transition name="main" mode="out-in">
+            <router-view></router-view>
+        </transition>
         <nav class="mui-bar mui-bar-tab" ref="n2">
             <router-link :to="{name:'home'}" class="mui-tab-item" >
                 <span class="mui-icon icon-shouye"></span>
@@ -13,7 +16,7 @@
                 <span class="mui-tab-label">会员</span>
             </router-link>
             <router-link :to="{name:'shopcart'}"  class="mui-tab-item" >
-                <span class="mui-icon icon-gouwuche-white-copy"><span class="mui-badge">9</span></span>
+                <span class="mui-icon icon-gouwuche-white-copy"><span class="mui-badge">{{num}}</span></span>
                 <span class="mui-tab-label">购物车</span>
             </router-link>
             <router-link :to="{name:'search'}" class="mui-tab-item" >
@@ -26,15 +29,31 @@
 <script>
 //引入字体css
 import './static/css/iconfont.css';
+//引入vuebus
+import Connector from './components/commons/Connector.js';
 
     export default {
         data(){
             return {
-
+                num:0,
             }
+        },
+        created(){
+            //监听
+            Connector.$on('changeShopcart',(num)=>{
+                // console.log('出发了更改小球');
+                // console.log(this);
+                this.num += num;
+            })
         }
     }
 </script>
-<style>
-   /*@import url('./static/css/iconfont.css');*/
+<style scoped>
+   /*@import url('./static/css/iconfont.css');*/ 
+.main-enter-active, .main-leave-active {
+transition: opacity .5s
+}
+.main-enter, .main-leave-to  {
+  opacity: 0
+}
 </style>
