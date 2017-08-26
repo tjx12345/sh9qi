@@ -45,6 +45,8 @@
 </template>
 <script>
 import Connector from '../commons/Connector.js';
+//操作商品CRUD
+import GoodsTools from '../commons/GoodsTools.js';
 export default {
     data(){
         return {
@@ -74,6 +76,11 @@ export default {
             this.isShow = true;
             //通知父组件数据更改
             Connector.$emit('changeShopcart',this.pickNum);
+            //调用具备对于商品CRUD操作的对象的函数
+            GoodsTools.addOrUpdate({
+                id:this.goodsInfo.id,
+                num:this.pickNum,
+            });
         },
         afterEnter(){
             this.isShow = false;//移除小球

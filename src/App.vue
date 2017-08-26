@@ -31,11 +31,13 @@
 import './static/css/iconfont.css';
 //引入vuebus
 import Connector from './components/commons/Connector.js';
+//引入操作商品CRUD的对象
+import GoodsTools from './components/commons/GoodsTools.js';
 
     export default {
         data(){
             return {
-                num:0,
+                num:GoodsTools.getProdCount(),
             }
         },
         created(){
@@ -44,7 +46,11 @@ import Connector from './components/commons/Connector.js';
                 // console.log('出发了更改小球');
                 // console.log(this);
                 this.num += num;
-            })
+            });
+             //监听改变总数
+            Connector.$on('changeShopcart2',(num)=>{
+                this.num = num;
+            });
         }
     }
 </script>
