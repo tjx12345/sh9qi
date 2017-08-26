@@ -1,1 +1,18 @@
 [0826/102158.454:ERROR:http_transport_win.cc(50)] WinHttpSendRequest: 与服务器的连接意外终止  (0x2EFE)
+[0826/115148.562:ERROR:process_reader_win.cc(142)] SuspendThread: 拒绝访问。 (0x5)
+[0826/115148.569:ERROR:exception_snapshot_win.cc(87)] thread ID 3316 not found in process
+[0826/115148.569:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed
+[0826/151102.729:ERROR:process_reader_win.cc(142)] SuspendThread: 拒绝访问。 (0x5)
+[0826/151102.730:ERROR:process_reader_win.cc(142)] SuspendThread: 拒绝访问。 (0x5)
+[0826/151102.730:ERROR:process_reader_win.cc(142)] SuspendThread: 拒绝访问。 (0x5)
+[0826/151102.730:ERROR:exception_snapshot_win.cc(87)] thread ID 8876 not found in process
+[0826/151102.730:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed
+[0826/151103.645:ERROR:process_reader_win.cc(142)] SuspendThread: 拒绝访问。 (0x5)
+[0826/151103.645:ERROR:process_reader_win.cc(142)] SuspendThread: 拒绝访问。 (0x5)
+[0826/151103.645:ERROR:process_reader_win.cc(142)] SuspendThread: 拒绝访问。 (0x5)
+[0826/151103.672:ERROR:process_reader_win.cc(142)] SuspendThread: 拒绝访问。 (0x5)
+[0826/151103.673:ERROR:process_reader_win.cc(142)] SuspendThread: 拒绝访问。 (0x5)
+[0826/151103.913:ERROR:process_reader_win.cc(142)] SuspendThread: 拒绝访问。 (0x5)
+[0826/151103.913:ERROR:exception_snapshot_win.cc(87)] thread ID 10340 not found in process
+[0826/151103.913:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed
+[0826/151352.288:ERROR:http_transport_win.cc(50)] WinHttpSendRequest: 与服务器的连接意外终止  (0x2EFE)

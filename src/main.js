@@ -3,18 +3,20 @@ import Vue from 'vue';
 
 //引入组件 开始
 import App from './App.vue';
-import Home from './components/home/Home.vue'
-import Vip from './components/vip/Vip.vue';
-import Shopcart from './components/shopcart/Shopcart.vue';
-import Search from './components/search/Search.vue';
-import NewsList from './components/news/NewsList.vue';
-import NewsDetail from './components/news/NewsDetail.vue';
-import PhotoList from './components/photo/PhotoList.vue';
-import PhotoDetail from './components/photo/PhotoDetail.vue';
-import GoodsList from './components/goods/GoodsList.vue';
-import GoodsDetail from './components/goods/GoodsDetail.vue';
-import GoodsComment from './components/goods/GoodsComment.vue';
-import NotFound from './components/commons/NotFound.vue';
+//原来此处都是 Import的写法，现在改为按需加载
+//const Foo = resolve => require(['./Foo.vue'], resolve)
+const Home = r => require(['./components/home/Home.vue'],r);
+const Vip = r => require(['./components/vip/Vip.vue'],r);
+const Shopcart = r => require(['./components/shopcart/Shopcart.vue'],r);
+const Search = r => require(['./components/search/Search.vue'],r);
+const NewsList = r => require(['./components/news/NewsList.vue'],r);
+const NewsDetail = r => require(['./components/news/NewsDetail.vue'],r);
+const PhotoList = r => require(['./components/photo/PhotoList.vue'],r);
+const PhotoDetail = r => require(['./components/photo/PhotoDetail.vue'],r);
+const GoodsList = r => require(['./components/goods/GoodsList.vue'],r);
+const GoodsDetail = r => require(['./components/goods/GoodsDetail.vue'],r);
+const GoodsComment = r => require(['./components/goods/GoodsComment.vue'],r);
+const NotFound = r => require(['./components/commons/NotFound.vue'],r);
 //引入组件 结束
 
 //全局组件的操作 开始
@@ -43,9 +45,38 @@ Vue.use(VuePreview);
 //VuePreview: 结束
 
 //MintUi: 开始
-import MintUi from 'mint-ui';
-import 'mint-ui/lib/style.css';
-Vue.use(MintUi);
+// import MintUi from 'mint-ui';
+// import 'mint-ui/lib/style.css';
+// Vue.use(MintUi);
+
+import Header from 'mint-ui/lib/header';
+import 'mint-ui/lib/header/style.css';
+import Switch from 'mint-ui/lib/switch';
+import 'mint-ui/lib/switch/style.css';
+import Swipe from 'mint-ui/lib/swipe';
+import 'mint-ui/lib/swipe/style.css';
+import SwipeItem from 'mint-ui/lib/swipe-item';
+import 'mint-ui/lib/swipe-item/style.css';
+import Lazyload from 'mint-ui/lib/lazyload';
+import 'mint-ui/lib/lazyload/style.css';
+import Loadmore from 'mint-ui/lib/loadmore';
+import 'mint-ui/lib/loadmore/style.css';
+import Indicator from 'mint-ui/lib/indicator';
+import 'mint-ui/lib/indicator/style.css';
+import Button from 'mint-ui/lib/button';
+import 'mint-ui/lib/button/style.css';
+Vue.component(Header.name, Header);
+Vue.component(Switch.name, Switch);
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Loadmore.name, Loadmore);
+Vue.component(Button.name, Button);
+Vue.use(Lazyload);
+
+
+
+
+
 //MintUi: 结束
 
 // Mui: 开始
@@ -113,7 +144,7 @@ Vue.prototype.$ajax = Axios;
 Axios.defaults.baseURL = 'http://182.254.146.100:8899/api/';
 //设置loading拦截器
 Axios.interceptors.request.use(config=>{
-    MintUi.Indicator.open({//显示loadding图标
+    Indicator.open({//显示loadding图标
       text: '加载中...',
       spinnerType: 'fading-circle'
     });
@@ -121,16 +152,21 @@ Axios.interceptors.request.use(config=>{
 });
 //响应的拦截器
 Axios.interceptors.response.use(response=>{
-    MintUi.Indicator.close(); //关闭loadding图标
+    Indicator.close(); //关闭loadding图标
     return response;
 })
-
-
 
 //Axios: 结束
 
 
 //引入第三方包 结束
+
+
+console.log('更改了代码1');
+console.log('此时更改了js代码，通过版本号绕过缓存，但是你看图片')
+console.log('修改了main.js,其余图片未改动');
+console.log('提取第三方以后，修改了main.js,第三方未改动1');
+console.log('提取第三方以后，修改了main.js,第三方未改动2');
 
 
 new Vue({
